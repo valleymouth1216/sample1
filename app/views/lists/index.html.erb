@@ -1,15 +1,29 @@
 <h1>一覧画面</h1>
 
-<% @lists.each do |list|%>
+<div class="main-index">
+ <div class="main-index_item">
+ <table border="0">
+  <thead>
+   <tr>
+    <th>id</th>
+    <th>タイトル</th>
+    <th>本題</th>
+   </tr>
+  </thead>
+  <tbody>
+    <% @lists.each.with_index(1) do |list,i| %>
+   <tr>
+    <td><%= i %></td>
+    <td><%= link_to list.title,list_path(list.id) %></td>
+    <td><%= list.body%></td>
+    <td><%= link_to "詳細",list_path(list.id) %></td>
+    <td><%= link_to "編集",edit_list_path(list.id) %></td>
+    <td><%= link_to "削除",list_path(list.id),method: :delete,"data-confirm"=>"本当に削除しますか？？？"  %></td>
+   </tr>
+  </tbody>
 
-<h4>タイトル</h4>
-<span><%= link_to list.title,list_path(list.id) %></span>
-<h4>画像</h4>
- <% if list.image.attached? %>
-  <%= image_tag list.image ,size: "200x200"%>
-  <% else %>
-  <%= image_tag "no_image" ,size: "200x200" %>
- <% end %>
+  <% end %>
+ </table>
+  </div>
 
-<% end %>
-
+</div>

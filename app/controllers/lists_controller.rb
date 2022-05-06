@@ -31,10 +31,21 @@ class ListsController < ApplicationController
   end
 
   def update
-   list=List.find(params[:id])
-   list.update(list_params)
-   redirect_to list_path(list.id)
+    @list=List.find(params[:id])
+    if @list.update(list_params)
+    redirect_to list_path(@list.id)
+    else
+      render :edit
+    end
   end
+
+ # def update
+ #  list=List.find(params[:id])
+ #  list.update(list_params)
+ #  redirect_to list_path(list.id)
+ # end
+
+
 
   def destroy
     list=List.find(params[:id])
