@@ -23,7 +23,7 @@ class ListsController < ApplicationController
   end
 
   def index
-    @lists = List.all
+    @lists = List.order(id: :DESC)
   end
 
   def edit

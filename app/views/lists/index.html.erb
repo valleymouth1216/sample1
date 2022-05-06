@@ -2,20 +2,29 @@
 
 <div class="main-index">
  <div class="main-index_item">
- <table border="0">
+ <table border="1">
   <thead>
    <tr>
     <th>id</th>
     <th>タイトル</th>
     <th>本題</th>
+    <th>画像</th>
    </tr>
   </thead>
   <tbody>
+   
     <% @lists.each.with_index(1) do |list,i| %>
    <tr>
     <td><%= i %></td>
     <td><%= link_to list.title,list_path(list.id) %></td>
-    <td><%= list.body%></td>
+    <td><%= list.body %></td>
+    <td>
+ <% if list.image.attached? %>
+  <%= image_tag list.image ,size: "200x200"%>
+  <% else %>
+  <%= image_tag "no_image" ,size: "200x200" %>
+ <% end %>
+    </td>
     <td><%= link_to "詳細",list_path(list.id) %></td>
     <td><%= link_to "編集",edit_list_path(list.id) %></td>
     <td><%= link_to "削除",list_path(list.id),method: :delete,"data-confirm"=>"本当に削除しますか？？？"  %></td>
@@ -27,3 +36,5 @@
   </div>
 
 </div>
+
+
