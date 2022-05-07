@@ -1,7 +1,7 @@
 <h1>編集画面</h1>
 
 <% if @list.errors.any? %>
-<%= @list.errors.count %>件のエラーが発生しました。
+<%= @list.errors.count %> error prohibited this book from being saved:
 <ul>
   <% @list.errors.full_messages.each do |message|%>
 <li><%= message %></li>
@@ -9,13 +9,21 @@
 </ul>
 <% end %>
 
-
 <%= form_with model: @list,url: list_path(@list.id),method: :patch do |f| %>
+
+
 <h4>タイトル</h4>
 <%= f.text_field :title %>
+
 <h4>本文</h4>
 <%= f.text_area :body %>
+
 <h4>画像</h4>
 <%= f.file_field :image ,accept: "image/*" %>
+
 <%= f.submit "保存"%>
 <% end %>
+
+<%= link_to "戻る","/lists" %>
+<span>|</span>
+<%= link_to "詳細",list_path(@list.id) %>

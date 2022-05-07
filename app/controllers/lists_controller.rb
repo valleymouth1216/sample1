@@ -4,11 +4,12 @@ class ListsController < ApplicationController
   end
 
   def create
-  @list=List.new(list_params)
+   @lists = List.all
+   @list=List.new(list_params)
    if @list.save
-  redirect_to list_path(@list.id)
+     redirect_to list_path(@list.id)
    else
-    render :new
+    render :index
    end
   end
 
@@ -23,7 +24,8 @@ class ListsController < ApplicationController
   end
 
   def index
-    @lists = List.order(id: :DESC)
+    @lists = List.all
+    @list = List.new
   end
 
   def edit
@@ -33,7 +35,8 @@ class ListsController < ApplicationController
   def update
     @list=List.find(params[:id])
     if @list.update(list_params)
-    redirect_to list_path(@list.id)
+       redirect_to list_path(@list.id)
+       flash[:notice] = "更新しました！！！"
     else
       render :edit
     end
@@ -51,6 +54,7 @@ class ListsController < ApplicationController
     list=List.find(params[:id])
     list.destroy
     redirect_to "/lists"
+    flash[:notic] = "削除しました。"
   end
 
   private
@@ -58,4 +62,9 @@ class ListsController < ApplicationController
   def list_params
    params.require(:list).permit(:title, :body,:image)
   end
+
+#  def list_params
+#   params.require(:list).permit(:title, :body,:image)
+#  end  newページ使えない
+
 end

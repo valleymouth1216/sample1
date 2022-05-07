@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'top' => 'homes#top'
+  root 'homes#top'
   resources :lists
-  
+
   #get 'lists/new'
   #get 'top' => 'home#top'
   #post 'lists' => 'lists#create'
